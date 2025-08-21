@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Menu, User, BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -20,37 +21,37 @@ export function Header({ onMenuClick }: HeaderProps) {
               <Menu className="w-5 h-5" />
             </Button>
             
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-primary">
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                 AssessmentPro
               </span>
-            </div>
+            </Link>
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#" className="text-sm font-medium text-foreground hover:text-primary transition-smooth">
+            <Link to="/categories" className="text-sm font-medium text-foreground hover:text-primary transition-smooth">
               Categories
-            </a>
-            <a href="#" className="text-sm font-medium text-foreground hover:text-primary transition-smooth">
+            </Link>
+            <Link to="/popular" className="text-sm font-medium text-foreground hover:text-primary transition-smooth">
               Popular
-            </a>
-            <a href="#" className="text-sm font-medium text-foreground hover:text-primary transition-smooth">
+            </Link>
+            <Link to="/new" className="text-sm font-medium text-foreground hover:text-primary transition-smooth">
               New
-            </a>
-            <a href="#" className="text-sm font-medium text-foreground hover:text-primary transition-smooth">
+            </Link>
+            <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-smooth">
               About
-            </a>
+            </Link>
           </nav>
 
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm">
-              Sign In
+            <Button variant="ghost" size="sm" asChild>
+              <Link to="/sign-in">Sign In</Link>
             </Button>
-            <Button variant="hero" size="sm">
-              Get Started
+            <Button variant="hero" size="sm" asChild>
+              <Link to="/get-started">Get Started</Link>
             </Button>
           </div>
         </div>

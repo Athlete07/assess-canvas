@@ -5,6 +5,7 @@ import { CategoryCard } from "@/components/CategoryCard";
 import { AssessmentCard } from "@/components/AssessmentCard";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Star, Users, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-image.jpg";
 import categoryEducation from "@/assets/category-education.jpg";
 import categoryHealth from "@/assets/category-health.jpg";
@@ -247,30 +248,30 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4">Categories</h4>
               <ul className="space-y-2 text-primary-foreground/80">
-                <li><a href="#" className="hover:text-white transition-colors">Education</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Health</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Business</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Personal</a></li>
+                <li><Link to="/categories" className="hover:text-white transition-colors">Education</Link></li>
+                <li><Link to="/categories" className="hover:text-white transition-colors">Health</Link></li>
+                <li><Link to="/categories" className="hover:text-white transition-colors">Business</Link></li>
+                <li><Link to="/categories" className="hover:text-white transition-colors">Personal</Link></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-primary-foreground/80">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Connect</h4>
               <ul className="space-y-2 text-primary-foreground/80">
-                <li><a href="#" className="hover:text-white transition-colors">Newsletter</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Community</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Newsletter</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Blog</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Community</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">API</Link></li>
               </ul>
             </div>
           </div>
