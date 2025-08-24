@@ -212,7 +212,11 @@ const About = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Join over 1 million users who have discovered insights about themselves through our assessments.
             </p>
-            <Button size="lg" className="text-lg px-8 py-3">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-3"
+              onClick={() => window.location.href = '/get-started'}
+            >
               Get Started Today
               <ArrowRight className="w-5 h-5" />
             </Button>

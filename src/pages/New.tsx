@@ -69,18 +69,29 @@ const New = () => {
   const [sortBy, setSortBy] = useState("newest");
 
   const handleAssessmentClick = (title: string) => {
-    console.log("Assessment clicked:", title);
+    // Create a URL-friendly slug from the title
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    // In a real app, this would navigate to /assessment/[slug]
+    window.open(`/assessment/${slug}`, '_blank');
   };
 
   const handleFilterClick = () => {
-    console.log("Filter clicked");
+    // Cycle through sort options
+    const sortOptions = ["newest", "trending"];
+    const currentIndex = sortOptions.indexOf(sortBy);
+    const nextIndex = (currentIndex + 1) % sortOptions.length;
+    setSortBy(sortOptions[nextIndex]);
   };
 
   const filteredAssessments = newAssessments.filter(assessment =>
     assessment.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     assessment.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
     assessment.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ).sort((a, b) => {
+    if (sortBy === "newest") return b.participants - a.participants; // Simulate newest by participants
+    if (sortBy === "trending") return a.participants - b.participants; // Reverse for trending
+    return 0;
+  });
 
   return (
     <div className="min-h-screen bg-background">

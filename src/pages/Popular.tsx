@@ -63,18 +63,36 @@ const Popular = () => {
   const [timeframe, setTimeframe] = useState("all-time");
 
   const handleAssessmentClick = (title: string) => {
-    console.log("Assessment clicked:", title);
+    // Create a URL-friendly slug from the title
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    // In a real app, this would navigate to /assessment/[slug]
+    window.open(`/assessment/${slug}`, '_blank');
   };
 
   const handleFilterClick = () => {
-    console.log("Filter clicked");
+    // Cycle through timeframe options
+    const timeframes = ["all-time", "this-month", "this-week"];
+    const currentIndex = timeframes.indexOf(timeframe);
+    const nextIndex = (currentIndex + 1) % timeframes.length;
+    setTimeframe(timeframes[nextIndex]);
   };
 
-  const filteredAssessments = popularAssessments.filter(assessment =>
-    assessment.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    assessment.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    assessment.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredAssessments = popularAssessments.filter(assessment => {
+    const matchesSearch = assessment.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      assessment.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      assessment.category.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    if (timeframe === "all-time") return matchesSearch;
+    if (timeframe === "this-month") return matchesSearch && assessment.participants > 100000;
+    if (timeframe === "this-week") return matchesSearch && assessment.participants > 150000;
+    
+    return matchesSearch;
+  }).sort((a, b) => {
+    if (timeframe === "all-time") return b.participants - a.participants;
+    if (timeframe === "this-month") return b.participants - a.participants;
+    if (timeframe === "this-week") return b.participants - a.participants;
+    return 0;
+  });
 
   return (
     <div className="min-h-screen bg-background">

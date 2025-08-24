@@ -60,17 +60,31 @@ const Categories = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
 
   const handleCategoryClick = (category: string) => {
-    console.log("Category clicked:", category);
+    // Navigate to filtered assessments based on category
+    setSearchQuery(category.toLowerCase());
+    // Could also navigate to a dedicated category page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleFilterClick = () => {
-    console.log("Filter clicked");
+    // Toggle advanced filter options
+    const filterOptions = ["All Categories", "Beginner Friendly", "Quick (< 10 min)", "Advanced"];
+    const currentIndex = filterOptions.indexOf(selectedFilter === "all" ? "All Categories" : selectedFilter);
+    const nextIndex = (currentIndex + 1) % filterOptions.length;
+    const nextFilter = filterOptions[nextIndex];
+    setSelectedFilter(nextFilter === "All Categories" ? "all" : nextFilter.toLowerCase().replace(/[^a-z]/g, ''));
   };
 
-  const filteredCategories = allCategories.filter(category =>
-    category.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    category.description.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredCategories = allCategories.filter(category => {
+    const matchesSearch = category.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      category.description.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    if (selectedFilter === "all") return matchesSearch;
+    if (selectedFilter === "popular") return matchesSearch && category.count > 80;
+    if (selectedFilter === "newest") return matchesSearch && ["Technology", "Finance"].includes(category.title);
+    
+    return matchesSearch;
+  });
 
   return (
     <div className="min-h-screen bg-background">
